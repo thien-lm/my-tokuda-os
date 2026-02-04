@@ -31,5 +31,9 @@ mykernel.iso: mykernel.bin
 		grub-mkrescue -o $@ iso
 		rm -rf iso
 
+run-qemu: mykernel.iso
+		qemu-system-i386 -cdrom $< -boot d -m 2048
+
+
 run: mykernel.iso
-		qemu-system-i386 -cdrom $<
+		VirtualBoxVM --startvm "myos" &
